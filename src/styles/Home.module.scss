@@ -1,3 +1,10 @@
-.container {
-  color: red;
+.cardContainer {
+  border: 1px solid white;
+  border-radius: 16px;
+  background-color: grey;
+
+  img {
+    width: 250px;
+    height: 250px;
+  }
 }

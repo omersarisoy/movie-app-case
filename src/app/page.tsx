@@ -1,7 +1,10 @@
-import styles from '@/styles/Home.module.scss'
+'use client'
+import MovieList from '@/components/MovieList';
 
 export default function Home() {
   return (
-    <div className={styles.container}>Hello Ömer</div>
+      <div className='row d-flex align-items-scretch justify-content-between  gap-2'>
+        <MovieList/>
+      </div>
   )
 }

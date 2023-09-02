@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
+import movieStatesReducer from '@/features/moviesStatesSlice'
 
 export const store = configureStore({
   reducer: {
-    // allMovies: allMoviesReducer
+    movieStates: movieStatesReducer,
   },
 })
 
