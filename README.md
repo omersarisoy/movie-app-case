@@ -1,15 +1,8 @@
-## Getting Started
+Movie-app-case
+This project was generated with NextJs version 13.4.19.
 
-First, run the development server:
+Development server
+Run npm dev serve for a dev server. Navigate to http://localhost:3000/. The app will automatically reload if you change any of the source files.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Build
+Run npm build to build the project.
