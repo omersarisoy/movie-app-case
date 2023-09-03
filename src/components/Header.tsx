@@ -19,7 +19,6 @@ const Header = ({type}:any) => {
             </div>
           </>
         )}
-
     </div>
   )
 }

@@ -1,4 +1,5 @@
 'use client'
+import MovieDetail from "@/components/MovieDetail"
 import { generateOptions } from "@/components/SelectYear"
 import { fetchMovieDetails, fetchMovieSeasons } from "@/features/moviesStatesSlice"
 import { useAppDispatch, useAppSelector } from "@/store/hooks"
@@ -7,11 +8,13 @@ import { useEffect, useState } from "react"
 
 const Detail = () => {
 
-  const [season, setSeason] = useState("1")
   const {id} = useParams();
-
+  
   const dispatch = useAppDispatch();
   const {detail, seasonsData} = useAppSelector((state) => state.movieStates)
+  const [season, setSeason] = useState("1")
+  const [showEposide, setShowEposide] = useState(false)
+  const router = useRouter()
 
 
   useEffect(() => {
@@ -33,31 +36,8 @@ const Detail = () => {
   return (
     <div className="container">
       {detail ? (
-        <section className='modal-main text-light'>
-          <div className='modal-body'>
-            <div className='modal-img'>
-              <img src={detail.Poster} alt='Poster' />
-            </div>
-          </div>
-          <div className='modal-info'>
-            <p>
-              <b>Actors:</b> {detail.Actors}
-            </p>
-            <p>
-              <b>Genre:</b> {detail.Genre}
-            </p>
-            <p>
-              <b>Director:</b> {detail.Director}
-            </p>
-            <p>
-              <b>Released:</b> {detail.Released}
-            </p>
-            <p>
-              <b>Plot:</b> {detail.Plot}
-            </p>
-          </div>
-          <div>
-            Episodes
+        <section className='text-light'>
+          <MovieDetail movie={detail} />
             <div>
             { totalSeasons && totalSeasons > 1  ? (
               <div className="d-flex align-items-start justify-content-start flex-column">
@@ -71,17 +51,27 @@ const Detail = () => {
                 {generateOptions(1, totalSeasons)}
               </select>
               </div>
-
             ) : (
-              'test'
+              'no movie detail'
             )
-
             }
-            <div>{console.log('seasonData :>> ', seasonsData)}</div>
+            <div className="row g-5 py-5">
+              {seasonsData?.Episodes?.map((x:any) => (
+                <div key={x.imdbID} className="col-3">
+                  <div className="card">
+                    <div className="card-body">
+                      <h5 className="card-title">Bölüm: {x.Episode}</h5>
+                      <p className="card-text">Bölüm Adı: {x.Title}</p>
+                      <p className="card-text">IMDB puanı: {x.imdbRating}</p>
+                      <p className="card-text">Yayınlandı:{x.Released}</p>
+                      <button onClick={() => router.push(`/${detail.imdbID}/${x.imdbID}`)} className="btn btn-primary">Detay</button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              </div>
             </div>
-          </div>
         </section>
-
       ) : (
         'movie not found'
       )}

@@ -1,76 +1,10 @@
-// import { createSlice } from '@reduxjs/toolkit'
-
-// const initialState = {
-//   search: 'pokemon',
-//   year: ''
-// }
-
-// export const moviesStates = createSlice({
-//   name: 'moviesStates',
-//   initialState,
-//   reducers: {
-//     searchMovies: (state, action) => {
-//       state.search = action.payload
-//     },
-//     selectYear: (state, action) => {
-//       state.year = action.payload
-//     }
-//   },
-// })
-// export const { searchMovies, selectYear} = moviesStates.actions
-// export const getSearchValue = (state:any) => state.movieStates.search
-// export const getSelectedYear = (state:any) => state.movieStates.year
-// export default moviesStates.reducer
-
+import { FilterItem, StateHead } from "@/models/model";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export interface StateHead {
-    data: [],
-    detail: DetailType | null,
-    search: string,
-    year: string,
-    seasonsData: any,
-    type:string,
-    filter: FilterItem[],
-    loading: boolean,
-    error: string,
-} 
-export interface FilterItem {
-    type: string;
-    value: string;
-  }
-export interface DetailType {
-    Actors: string;
-    Awards: string;
-    Country: string;
-    Director: string;
-    Genre: string;
-    Language: string;
-    Metascore: string;
-    Plot: string; 
-    Poster: string;
-    Rated: string;
-    Ratings: {Source:string;Value:string}[];
-    Released: string;
-    Response: string;
-    Runtime: string;
-    Title: string;
-    Type: string;
-    Writer: string;
-    Year: string;
-    imdbID: string;
-    imdbRating: string;
-    imdbVotes: string;
-    totalSeasons: string;
-  }
 
 const initialState: StateHead = {
     data: [],
     detail: null,
-    search: '',
-    seasonsData: '',
-    year: '0',
-    type:'',
+    seasonsData: null,
     filter: [{
         type: 's',
         value: 'pokemon'
@@ -113,7 +47,7 @@ export const fetchMovieDetails = createAsyncThunk(
 
 export const fetchMovieSeasons = createAsyncThunk(
     "fetchMovieSeasons",
-    async (params: {query?: any}) => {
+    async (params: {query: any}) => {
         if (params?.query) {
             const response = await fetch(`${API_URL}${params.query ?? ''}`);
             const data = await response?.json();
@@ -121,20 +55,10 @@ export const fetchMovieSeasons = createAsyncThunk(
         }
     }
 );
-
 export const moviesStatesSlice = createSlice({
     name: "moviesStates",
     initialState,
     reducers: {
-        rSearch: (state,action) => {
-            state.search = action.payload
-        },
-        rYear: (state,action) => {
-            state.year = action.payload
-        },
-        rType: (state,action) => {
-            state.type = action.payload
-        },
         rFilter: (state,action) => {
             state.filter = [...action.payload]
         }
@@ -190,6 +114,6 @@ export const moviesStatesSlice = createSlice({
         });
     },
 });
-export const { rSearch, rYear, rType, rFilter } = moviesStatesSlice.actions
+export const { rFilter } = moviesStatesSlice.actions
 
 export default moviesStatesSlice.reducer;

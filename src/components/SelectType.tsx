@@ -1,9 +1,9 @@
 'use client'
-
-import { FilterItem, fetchMoviesStates, rFilter, rSearch, rType, rYear } from "@/features/moviesStatesSlice"
+import React, { useState } from "react"
+import { rFilter } from "@/features/moviesStatesSlice"
 import { useAppDispatch, useAppSelector } from "@/store/hooks"
-import React, { useEffect, useState } from "react"
 import styles from '@/styles/Home.module.scss'
+import { FilterItem } from "@/models/model"
 
 
 const SelectType = () => {
@@ -12,7 +12,7 @@ const SelectType = () => {
   const dispatch = useAppDispatch();
   const {filter} = useAppSelector((state) => state.movieStates)
 
-  const test = (value:string) => {
+  const sendType = (value:string) => {
     const indexValue = filter.findIndex((x:FilterItem) => x.value === value);
     let newArr = [...filter.filter((x:any) => x.type !== 'type')];
     if (indexValue > -1) {
@@ -26,26 +26,16 @@ const SelectType = () => {
     <div className="d-flex gap-3">
       <button 
         className={toggleMovie ? `${styles.activeBtn}`: `${styles.typeBtn}`}
-        onClick={() => test('movie')}
+        onClick={() => {sendType('movie'), setToggleMovie(!toggleMovie)}}
       >
         Movie
       </button>
       <button 
         className={toggleSeries ? `${styles.activeBtn}`: `${styles.typeBtn}`}
-        onClick={() => test('series')}
+        onClick={() => {sendType('series'), setToggleSeries(!toggleSeries)}}
       >
         Series
       </button>
-      {/* {filter.some((x:any) => x.type === 'type' && x.value === 'series') && (
-        <button 
-          className={toggleSeries ? `${styles.activeBtn}`: `${styles.typeBtn}`}
-          onClick={() => (
-            dispatch(rFilter([...filter, {type: 'eposide', value: '1'}]))
-          )}
-        >
-          Episode
-        </button>
-      )} */}
     </div>
   )
 }

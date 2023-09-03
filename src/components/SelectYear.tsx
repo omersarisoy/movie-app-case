@@ -1,5 +1,6 @@
 'use client'
-import { FilterItem, fetchMoviesStates, rFilter, rYear } from "@/features/moviesStatesSlice";
+import { fetchMoviesStates, rFilter, rYear } from "@/features/moviesStatesSlice";
+import { FilterItem } from "@/models/model";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useEffect, useState } from "react";
 
@@ -17,12 +18,6 @@ const SelectYear = () => {
   const dispatch = useAppDispatch()
   const {data} = useAppSelector((state) => state.movieStates)
   const {filter} = useAppSelector((state) => state.movieStates)
-
-  console.log('data :>> ', data);
-
-  // useEffect(() => {
-  //   dispatch(fetchMoviesStates())
-  // }, [year])
 
 
 

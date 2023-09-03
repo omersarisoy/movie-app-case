@@ -2,7 +2,6 @@
 import Header from '@/components/Header'
 import { Providers } from '@/store/providers'
 import "@/styles/customTheme.scss"
-import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { usePathname } from 'next/navigation'
 
@@ -23,7 +22,6 @@ export default function RootLayout({children,}: {children: React.ReactNode}) {
           <div className='container'>
            <Header type={pathname === '/'}/>
             {children}
-            {/* <Footer/> */}
           </div>
         </body>
       </html>
