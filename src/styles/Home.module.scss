@@ -8,3 +8,20 @@
     height: 250px;
   }
 }
+.typeBtn {
+  background-color: #62b7f3;
+  padding: 8px 16px;
+  font-size: 18px;
+  color: white;
+  border-radius: 16px;
+  border: none;
+}
+.activeBtn {
+  background-color: #2c96e7;
+  padding: 8px 16px;
+  font-size: 18px;
+  color: white;
+  border-radius: 16px;
+  border: 2px solid white;
+}
+

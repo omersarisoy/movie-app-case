@@ -1,6 +1,5 @@
 'use client'
 import React, { useEffect, useState } from "react"
-import styles from '@/styles/Home.module.scss'
 import MovieCard from "./MovieCard";
 import { useSelector } from "react-redux";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -11,7 +10,7 @@ const MovieList = () => {
   const {data} = useAppSelector((state) => state.movieStates)
   
   useEffect(() => {
-    dispatch(fetchMoviesStates('s=pokemon'))
+    dispatch(fetchMoviesStates({search: 'pokemon'}))
   }, [])
 
   return (

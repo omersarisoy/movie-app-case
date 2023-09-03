@@ -1,4 +1,5 @@
 import SearchBox from "./SearchBox"
+import SelectType from "./SelectType"
 import SelectYear from "./SelectYear"
 
 const Header = () => {
@@ -11,6 +12,10 @@ const Header = () => {
           <SearchBox />
           <SelectYear/>
         </div>
+        <div>
+          <SelectType />
+        </div>
+
     </div>
   )
 }

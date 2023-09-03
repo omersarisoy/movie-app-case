@@ -23,17 +23,41 @@
 // export default moviesStates.reducer
 
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+export interface FilterItem {
+    type: string;
+    value: string;
+  }
 
 const initialState: any = {
     data: [],
+    search: '',
+    year: 0,
+    type:'',
+    filter: [{
+        type: 's',
+        value: 'pokemon'
+    }],
     loading: false,
     error: "",
 };
+const API_URL = 'https://www.omdbapi.com/?apikey=c8f92f6c'
 
 export const fetchMoviesStates = createAsyncThunk(
     "fetchStates",
-    async (params: any) => {
-      const response = await fetch(`http://www.omdbapi.com/?${params}&apikey=c8f92f6c`);
+    async (params: {filter: FilterItem[]}) => {
+        let query: string = '';
+
+        if (params.filter?.length) {
+            params.filter.map((x:FilterItem) => {
+                if (x.type && !x.value) {
+                    query += `&${x.type}=pokemon`
+                } else {
+                    query += `&${x.type}=${x.value}`
+                }
+            });
+        }
+
+        const response = await fetch(`${API_URL}${query}`);
       const data = await response?.json();
       const movies = data?.Search
       return movies
@@ -43,7 +67,20 @@ export const fetchMoviesStates = createAsyncThunk(
 export const moviesStatesSlice = createSlice({
     name: "moviesStates",
     initialState,
-    reducers: {},
+    reducers: {
+        rSearch: (state,action) => {
+            state.search = action.payload
+        },
+        rYear: (state,action) => {
+            state.year = action.payload
+        },
+        rType: (state,action) => {
+            state.type = action.payload
+        },
+        rFilter: (state,action) => {
+            state.filter = [...action.payload]
+        }
+    },
     extraReducers: (builder: any) => {
         builder.addCase(fetchMoviesStates.pending, (state: any) => {
             state.loading = true;
@@ -63,5 +100,6 @@ export const moviesStatesSlice = createSlice({
         });
     },
 });
+export const { rSearch, rYear, rType, rFilter } = moviesStatesSlice.actions
 
 export default moviesStatesSlice.reducer;
