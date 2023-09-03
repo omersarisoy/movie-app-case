@@ -23,15 +23,53 @@
 // export default moviesStates.reducer
 
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+export interface StateHead {
+    data: [],
+    detail: DetailType | null,
+    search: string,
+    year: string,
+    seasonsData: any,
+    type:string,
+    filter: FilterItem[],
+    loading: boolean,
+    error: string,
+} 
 export interface FilterItem {
     type: string;
     value: string;
   }
+export interface DetailType {
+    Actors: string;
+    Awards: string;
+    Country: string;
+    Director: string;
+    Genre: string;
+    Language: string;
+    Metascore: string;
+    Plot: string; 
+    Poster: string;
+    Rated: string;
+    Ratings: {Source:string;Value:string}[];
+    Released: string;
+    Response: string;
+    Runtime: string;
+    Title: string;
+    Type: string;
+    Writer: string;
+    Year: string;
+    imdbID: string;
+    imdbRating: string;
+    imdbVotes: string;
+    totalSeasons: string;
+  }
 
-const initialState: any = {
+const initialState: StateHead = {
     data: [],
+    detail: null,
     search: '',
-    year: 0,
+    seasonsData: '',
+    year: '0',
     type:'',
     filter: [{
         type: 's',
@@ -46,7 +84,6 @@ export const fetchMoviesStates = createAsyncThunk(
     "fetchStates",
     async (params: {filter: FilterItem[]}) => {
         let query: string = '';
-
         if (params.filter?.length) {
             params.filter.map((x:FilterItem) => {
                 if (x.type && !x.value) {
@@ -56,11 +93,32 @@ export const fetchMoviesStates = createAsyncThunk(
                 }
             });
         }
-
         const response = await fetch(`${API_URL}${query}`);
-      const data = await response?.json();
-      const movies = data?.Search
-      return movies
+        const data = await response?.json();
+        const movies = data?.Search
+        return movies
+    }
+);
+
+export const fetchMovieDetails = createAsyncThunk(
+    "fetchMovieDetails",
+    async (params: {id: any, query?: any}) => {
+        if (params?.id) {
+            const response = await fetch(`${API_URL}&i=${params.id}${params.query ?? ''}`);
+            const data = await response?.json();
+            return data
+        }
+    }
+);
+
+export const fetchMovieSeasons = createAsyncThunk(
+    "fetchMovieSeasons",
+    async (params: {query?: any}) => {
+        if (params?.query) {
+            const response = await fetch(`${API_URL}${params.query ?? ''}`);
+            const data = await response?.json();
+            return data
+        }
     }
 );
 
@@ -96,6 +154,38 @@ export const moviesStatesSlice = createSlice({
         builder.addCase(fetchMoviesStates.rejected, (state: any) => {
             state.loading = false;
             state.data = [];
+            state.error = "Yüklenemedi";
+        });
+        builder.addCase(fetchMovieDetails.pending, (state: any) => {
+            state.loading = true;
+        });
+        builder.addCase(
+            fetchMovieDetails.fulfilled,
+            (state: any, action: PayloadAction<[]>) => {
+                state.loading = false;
+                state.error = "";
+                state.detail = action.payload;
+            }
+        );
+        builder.addCase(fetchMovieDetails.rejected, (state: any) => {
+            state.loading = false;
+            state.detail = '';
+            state.error = "Yüklenemedi";
+        });
+        builder.addCase(fetchMovieSeasons.pending, (state: any) => {
+            state.loading = true;
+        });
+        builder.addCase(
+            fetchMovieSeasons.fulfilled,
+            (state: any, action: PayloadAction<[]>) => {
+                state.loading = false;
+                state.error = "";
+                state.seasonsData = action.payload;
+            }
+        );
+        builder.addCase(fetchMovieSeasons.rejected, (state: any) => {
+            state.loading = false;
+            state.seasonsData = '';
             state.error = "Yüklenemedi";
         });
     },

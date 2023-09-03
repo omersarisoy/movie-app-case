@@ -21,7 +21,7 @@ export default function RootLayout({children,}: {children: React.ReactNode}) {
       <html lang="en">
         <body className={inter.className}>
           <div className='container'>
-           {pathname === '/' && <Header />} 
+           <Header type={pathname === '/'}/>
             {children}
             {/* <Footer/> */}
           </div>

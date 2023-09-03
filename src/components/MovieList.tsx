@@ -10,7 +10,7 @@ const MovieList = () => {
   const {data} = useAppSelector((state) => state.movieStates)
   
   useEffect(() => {
-    dispatch(fetchMoviesStates({search: 'pokemon'}))
+    // dispatch(fetchMoviesStates({search: 'pokemon'}))
   }, [])
 
   return (

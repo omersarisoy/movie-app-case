@@ -3,6 +3,14 @@ import { FilterItem, fetchMoviesStates, rFilter, rYear } from "@/features/movies
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useEffect, useState } from "react";
 
+export const generateOptions = (start:any, end:any) => {
+  const arr = [];
+
+  for (let i = end; i >= start; i--) {
+    arr.push(<option key={i} value={i}>{i}</option>);
+  }
+  return arr;
+};
 
 const SelectYear = () => {
 
@@ -16,17 +24,7 @@ const SelectYear = () => {
   //   dispatch(fetchMoviesStates())
   // }, [year])
 
-  const generateYearOptions = () => {
-    const arr = [];
-  
-    const startYear = 1960;
-    const endYear = new Date().getFullYear();
-  
-    for (let i = endYear; i >= startYear; i--) {
-      arr.push(<option key={i} value={i}>{i}</option>);
-    }
-    return arr;
-  };
+
 
   return (
     <div className="w-25">
@@ -57,7 +55,7 @@ const SelectYear = () => {
         }}
       >
         <option value='' >Select Year</option>
-        {generateYearOptions()}
+        {generateOptions(1960, new Date().getFullYear())}
       </select>
     </div>
   )

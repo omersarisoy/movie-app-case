@@ -12,43 +12,40 @@ const SelectType = () => {
   const dispatch = useAppDispatch();
   const {filter} = useAppSelector((state) => state.movieStates)
 
+  const test = (value:string) => {
+    const indexValue = filter.findIndex((x:FilterItem) => x.value === value);
+    let newArr = [...filter.filter((x:any) => x.type !== 'type')];
+    if (indexValue > -1) {
+      dispatch(rFilter([...newArr]));
+    } else {
+      dispatch(rFilter([...newArr, {type: 'type', value: value}]))
+    }
+  }
+
   return (
-    <div>
+    <div className="d-flex gap-3">
       <button 
         className={toggleMovie ? `${styles.activeBtn}`: `${styles.typeBtn}`}
-        onClick={() => {
-          const index = filter.findIndex((x:FilterItem) => x.type === 'type');
-          if (index > -1) {
-            let newFilter = [...filter];
-            for (let index = 0; index < newFilter.length; index++) {
-              newFilter.splice(index, 1);
-              dispatch(rFilter([...newFilter]))
-            }
-          } else {
-            dispatch(rFilter([...filter, {type: 'type', value: 'movie'}]))
-          }
-          setToggleMovie(!toggleMovie)
-        }}
+        onClick={() => test('movie')}
       >
         Movie
       </button>
       <button 
         className={toggleSeries ? `${styles.activeBtn}`: `${styles.typeBtn}`}
-        onClick={() => {
-          const index = filter.findIndex((x:FilterItem) => x.type === 'type');
-          if (index > -1) {
-            let newFilter = [...filter];
-            newFilter.splice(index, 1);
-            dispatch(rFilter([...newFilter]))
-          } else {
-            dispatch(rFilter([...filter, {type: 'type', value: 'series'}]))
-          }
-          setToggleSeries(!toggleSeries)
-        }}
+        onClick={() => test('series')}
       >
         Series
       </button>
-
+      {/* {filter.some((x:any) => x.type === 'type' && x.value === 'series') && (
+        <button 
+          className={toggleSeries ? `${styles.activeBtn}`: `${styles.typeBtn}`}
+          onClick={() => (
+            dispatch(rFilter([...filter, {type: 'eposide', value: '1'}]))
+          )}
+        >
+          Episode
+        </button>
+      )} */}
     </div>
   )
 }
