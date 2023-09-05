@@ -1,10 +1,9 @@
 'use client'
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import MovieCard from "./MovieCard";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { fetchMoviesStates, rFilter } from "@/features/moviesStatesSlice";
-import { FilterItem } from "@/models/model";
+import { fetchMoviesStates } from "@/features/moviesStatesSlice";
 import styles from '@/styles/General.module.scss'
 import { ArrowTop } from "./icon";
 

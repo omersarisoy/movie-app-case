@@ -1,9 +1,9 @@
 'use client'
 import Header from '@/components/Header'
 import { Providers } from '@/store/providers'
-import "@/styles/customTheme.scss"
 import { Inter } from 'next/font/google'
 import { usePathname } from 'next/navigation'
+import "@/styles/customTheme.scss"
 
 
 const inter = Inter({ subsets: ['latin'] })

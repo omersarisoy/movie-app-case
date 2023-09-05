@@ -1,8 +1,7 @@
 'use client'
-import { fetchMoviesStates, rFilter, rYear } from "@/features/moviesStatesSlice";
+import { rFilter } from "@/features/moviesStatesSlice";
 import { FilterItem } from "@/models/model";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { useEffect, useState } from "react";
 
 export const generateOptions = (start:any, end:any) => {
   const arr = [];
