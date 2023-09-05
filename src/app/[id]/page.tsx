@@ -28,7 +28,7 @@ const Detail = () => {
 
   return (
     <div className="container">
-      {detail ? (
+      {detail && (
         <section className='text-light'>
           <MovieDetail movie={detail} />
             <div>
@@ -62,8 +62,6 @@ const Detail = () => {
               </div>
             </div>
         </section>
-      ) : (
-        <h1 className="text-light">Novie not found</h1>
       )}
       
     </div>
