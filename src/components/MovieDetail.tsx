@@ -7,7 +7,7 @@ function MovieDetail(data: any) {
     return (
         <section className={`${styles.episodeWrap} row`} >
             <div className='col-lg-5 col-md-12'>
-                <img src={movie.Poster} alt='Poster' />
+                <img src={movie.Poster} alt='Poster' style={{ height: '100%' }}/>
             </div>
             <div className='col-lg-5 col-md-12 p-5'>
                 <p>
