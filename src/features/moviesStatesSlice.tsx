@@ -76,7 +76,7 @@ export const moviesStatesSlice = createSlice({
     });
     builder.addCase(
       fetchMoviesStates.fulfilled,
-      (state: any, action: PayloadAction<[]>) => {
+      (state: any, action: PayloadAction<any>) => {
         state.loading = false;
         state.error = "";
         let newArr = [...state.data]
