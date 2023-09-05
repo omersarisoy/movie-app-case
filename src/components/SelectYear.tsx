@@ -22,7 +22,7 @@ const SelectYear = () => {
 
 
   return (
-    <div className="w-25">
+    <div>
       <select
         className='form-select'
         name='year'

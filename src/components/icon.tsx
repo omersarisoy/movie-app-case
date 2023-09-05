@@ -1,60 +1,13 @@
-import React, { FC } from "react";
+import React from "react";
 
-interface SVGProps {
-  className?: string;
-  fill?: string;
-}
-
-export const ChevronLeft: FC<SVGProps> = ({ className }) => {
-  return (
-      <svg
-          className={`${className} rounded-xl bg-slate-100 hover:bg-green-600 hover:text-slate-100`}
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-      >
-          <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-          <g
-              id="SVGRepo_tracerCarrier"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-          ></g>
-          <g id="SVGRepo_iconCarrier">
-              {" "}
-              <path
-                  d="M15 6L9 12L15 18"
-                  stroke="#000000"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-              ></path>{" "}
-          </g>
-      </svg>
-  );
-};
-export const ChevronRight: FC<SVGProps> = ({ className }) => {
-  return (
-      <svg
-          className={`${className} rounded-xl bg-slate-100 hover:!bg-green-600 hover:!text-white`}
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-      >
-          <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-          <g
-              id="SVGRepo_tracerCarrier"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-          ></g>
-          <g id="SVGRepo_iconCarrier">
-              <path
-                  d="M9 6L15 12L9 18"
-                  stroke="#000000"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-              ></path>
-          </g>
-      </svg>
-  );
+export const ArrowTop = () => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 32 32">
+            <g data-name="9-Arrow Up">
+                <path d="M25 0H7a7 7 0 0 0-7 7v18a7 7 0 0 0 7 7h18a7 7 0 0 0 7-7V7a7 7 0 0 0-7-7zm5 25a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5h18a5 5 0 0 1 5 5z" />
+                <path d="m15.29 5.29-7 7L9.7 13.7 15 8.41V27h2V8.41l5.29 5.29 1.41-1.41-7-7a1 1 0 0 0-1.41 0z" />
+            </g>
+        </svg>
+    );
 };

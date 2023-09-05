@@ -7,15 +7,12 @@ import { useParams, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
 const Detail = () => {
-
   const {id} = useParams();
-  
   const dispatch = useAppDispatch();
   const {detail, seasonsData} = useAppSelector((state) => state.movieStates)
   const [season, setSeason] = useState("1")
-  const [showEposide, setShowEposide] = useState(false)
   const router = useRouter()
-
+  const totalSeasons = detail ? parseInt(detail.totalSeasons) : 0;
 
   useEffect(() => {
     if (id) {
@@ -29,17 +26,13 @@ const Detail = () => {
       }
   }, [season, detail?.Type])
 
-  const totalSeasons = detail ? parseInt(detail.totalSeasons) : 0;
-
-
-
   return (
     <div className="container">
       {detail ? (
         <section className='text-light'>
           <MovieDetail movie={detail} />
             <div>
-            { totalSeasons && totalSeasons > 1  ? (
+            { totalSeasons && totalSeasons > 1  && (
               <div className="d-flex align-items-start justify-content-start flex-column">
                 <span>Season</span>
               <select
@@ -51,20 +44,17 @@ const Detail = () => {
                 {generateOptions(1, totalSeasons)}
               </select>
               </div>
-            ) : (
-              'no movie detail'
-            )
-            }
+            )}
             <div className="row g-5 py-5">
               {seasonsData?.Episodes?.map((x:any) => (
-                <div key={x.imdbID} className="col-3">
-                  <div className="card">
-                    <div className="card-body">
-                      <h5 className="card-title">Bölüm: {x.Episode}</h5>
-                      <p className="card-text">Bölüm Adı: {x.Title}</p>
-                      <p className="card-text">IMDB puanı: {x.imdbRating}</p>
-                      <p className="card-text">Yayınlandı:{x.Released}</p>
-                      <button onClick={() => router.push(`/${detail.imdbID}/${x.imdbID}`)} className="btn btn-primary">Detay</button>
+                <div key={x.imdbID} className="col-xl-3 col-lg-4 col-sm-6">
+                  <div className="card border-danger border-3" style={{minHeight: 300}}>
+                    <div className="card-body d-flex flex-column justify-content-between">
+                      <h5 className="card-title"><b>Bölüm:</b> {x.Episode}</h5>
+                      <p className="card-text"><b>Bölüm Adı:</b> {x.Title}</p>
+                      <p className="card-text"><b>IMDB puanı:</b> {x.imdbRating}</p>
+                      <p className="card-text"><b>Yayın Tarihi:</b>{x.Released}</p>
+                      <button onClick={() => router.push(`/${detail.imdbID}/${x.imdbID}`)} className="btn btn-primary" style={{width:'100%'}}>Detay</button>
                     </div>
                   </div>
                 </div>
@@ -73,8 +63,9 @@ const Detail = () => {
             </div>
         </section>
       ) : (
-        'movie not found'
+        <h1 className="text-light">Novie not found</h1>
       )}
+      
     </div>
   )
 }

@@ -1,15 +1,16 @@
 
 export interface StateHead {
-    data: [],
-    detail: DetailType | null,
-    seasonsData: SeasonsOutput | null,
-    filter: FilterItem[],
-    loading: boolean,
-    error: string,
+    data: DetailType[] | null;
+    total: string;
+    detail: DetailType | null;
+    seasonsData: SeasonsOutput | null;
+    filter: FilterItem[];
+    loading: boolean;
+    error: string;
 } 
 export interface FilterItem {
     type: string;
-    value: string;
+    value: string | number;
   }
 export interface DetailType {
     Actors: string;

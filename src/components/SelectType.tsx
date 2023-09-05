@@ -2,7 +2,7 @@
 import React, { useState } from "react"
 import { rFilter } from "@/features/moviesStatesSlice"
 import { useAppDispatch, useAppSelector } from "@/store/hooks"
-import styles from '@/styles/Home.module.scss'
+import styles from '@/styles/General.module.scss'
 import { FilterItem } from "@/models/model"
 
 

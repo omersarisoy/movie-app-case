@@ -1,15 +1,15 @@
 import React from 'react'
+import styles from '@/styles/General.module.scss'
 
 function MovieDetail(data: any) {
     const { movie } = data
+
     return (
-        <section className='modal-main text-light'>
-            <div className='modal-body'>
-                <div className='modal-img'>
-                    <img src={movie.Poster} alt='Poster' />
-                </div>
+        <section className={`${styles.episodeWrap} row`} >
+            <div className='col-lg-5 col-md-12'>
+                <img src={movie.Poster} alt='Poster' />
             </div>
-            <div className='modal-info'>
+            <div className='col-lg-5 col-md-12 p-5'>
                 <p>
                     <b>Actors:</b> {movie.Actors}
                 </p>
@@ -23,7 +23,16 @@ function MovieDetail(data: any) {
                     <b>Released:</b> {movie.Released}
                 </p>
                 <p>
-                    <b>Plot:</b> {movie.Plot}
+                    <b>Runtime:</b> {movie.Runtime}
+                </p>
+                <p>
+                    <b>Season:</b> {movie.Season}
+                </p>
+                <p>
+                    <b>Title:</b> {movie.Title}
+                </p>
+                <p>
+                    <b>Writer:</b> {movie.Writer}
                 </p>
             </div>
         </section>
